@@ -1,0 +1,35 @@
+import React from 'react'
+import Img from "../assets/images/tatttoo_home.avif"
+import AboutMe from '../components/AboutMe'
+import GalleryItems from '../components/GalleryItems'
+import Contact from '../components/Contact'
+const Home = () => {
+  return (
+    <div id="home">
+      <div className="relative w-full max-h-[925px] h-screen overflow-hidden">
+        
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="w-[1378px] text-center justify-start text-white text-8xl font-normal font-['Playfair_Display_SC'] leading-[165.33px]">
+                Ink isn't just on the skin, it's in the soul
+          </div>
+        </div>
+        <div className="w-[1378px] text-center justify-start text-white text-8xl font-normal font-['Playfair_Display_SC'] leading-[165.33px]">Ink isn't just on the skin, it's in the soul</div>
+
+        <img 
+          src={Img} 
+          className="absolute top-0 left-0 w-full h-full object-cover object-center" 
+          alt="Home"
+        />
+
+        {/* Red overlay */}
+        <div className="absolute top-0 left-0 w-full h-full bg-red-700/20"></div>
+
+      </div>
+      <AboutMe id="about-section"/>
+      <GalleryItems />
+      <Contact />
+    </div>
+  )
+}
+
+export default Home
