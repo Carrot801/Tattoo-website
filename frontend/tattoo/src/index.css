@@ -1,45 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import "tailwindcss";
+
 .noise {
-    background-image: url("/src/assets/images/noisy.png");
+  background-image: url("/images/noisy.png");
+  background-blend-mode: overlay;
 }
 .galleryItemBackground {
-    background-image: url("/src/assets/images/GalleryItemBackground.jpg");
-    /* background-color: rgba(193, 41, 46, 0.3); */
-    background-color: rgba(0, 0, 0, 0.3);
-    background-blend-mode: overlay;
-    background-size: cover;
+  background-image: url("/images/GalleryItemBackground.jpg");
+  background-color: rgba(0, 0, 0, 0.3);
+  background-blend-mode: overlay;
+  background-size: cover;
 }
 .contactBackground {
-    background-image: 
-    url("/src/assets/images/noisy.png"),
-    url("/src/assets/images/map.png");
-    background-size: cover, cover;
-    background-repeat: repeat, no-repeat;
-    opacity: 0.8;
-    background-color: rgba(0, 0, 0, 0.4);
-    background-blend-mode: overlay;  
+  background-image: url("/images/noisy.png"), url("/assets/images/map.png");
+  background-size: cover, cover;
+  background-repeat: repeat, no-repeat;
+  opacity: 0.8;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: overlay;  
 }
-.contactWindow{
-    background-image: 
-    url("/src/assets/images/noisy.png"),
-    url("/src/assets/images/GalleryItemBackground.jpg");
-    background-size: cover,cover;
-    background-repeat: repeat, no-repeat;
-     background:
-    rgba(193, 41, 46, 0.43),
-    rgba(2, 1, 0, 1); 
-    background-blend-mode: overlay;  
+.contactWindow {
+  background-image: url("/images/noisy.png"), url("/assets/images/GalleryItemBackground.jpg");
+  background-size: cover, cover;
+  background-repeat: repeat, no-repeat;
+  background: rgba(193, 41, 46, 0.43), rgba(2, 1, 0, 1);
+  background-blend-mode: overlay;  
 }
+
 .sideImage-hover {
   @apply object-cover cursor-pointer opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-105;
 }
 
 .sideImage-large {
-  @apply w-[470px] h-[620px] ;
+  @apply w-[470px] h-[620px];
 }
 
 .sideImage-small {
   @apply w-[356px] h-[470px];
 }
-
