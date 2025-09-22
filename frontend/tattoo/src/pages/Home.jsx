@@ -6,7 +6,7 @@ import Contact from '../components/Contact'
 const Home = () => {
   return (
     <div id="home">
-      <div className="relative w-full max-h-[925px] h-screen overflow-hidden">
+      <div className="relative w-full h-1/2 sm:h-screen md:h-screen lg:h-screen overflow-hidden">
         
         <div className="absolute inset-0 flex items-center justify-center z-10">
         <div className="w-[1378px] text-center justify-start text-white text-8xl font-normal font-['Playfair_Display_SC'] leading-[165.33px]">

@@ -62,9 +62,9 @@ const Navigationbar = ({ setCurrentPage, currentPage }) => {
 
   return (
     <nav 
-className={`bg-black/50 backdrop-blur-sm p-1 shadow-lg fixed top-0 left-0 right-0 z-50 transform transition-transform duration-500 ${
-    showNavbar ? "translate-y-0" : "-translate-y-full"
-  }`}>
+    className={`bg-black/50 backdrop-blur-sm p-1 shadow-lg fixed top-0 left-0 right-0 z-50 transform transition-transform duration-500 ${
+        showNavbar ? "translate-y-0" : "-translate-y-full"
+      }`}>
         <div className="container mx-auto flex items-center justify-end">
         {/* Navigation links */}
         <div className="flex items-center h-full space-x-6">
