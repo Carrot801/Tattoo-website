@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const Navigationbar = ({ setCurrentPage, currentPage }) => {
   const [activeSection, setActiveSection] = useState('home');
+  const navigate = useNavigate();
 
   // Common styling for navigation links
   const linkClass = "hover:text-red-700  transition-colors duration-200";
@@ -65,6 +67,9 @@ const Navigationbar = ({ setCurrentPage, currentPage }) => {
     className={`bg-black/50 backdrop-blur-sm p-1 shadow-lg fixed top-0 left-0 right-0 z-50 transform transition-transform duration-500 ${
         showNavbar ? "translate-y-0" : "-translate-y-full"
       }`}>
+        <div className="h-[30px] w-[30px] flex absolute top-0 left-0"
+        onClick={() => navigate("/admin")}>
+        </div>
         <div className="container mx-auto flex items-center justify-end">
         {/* Navigation links */}
         <div className="flex items-center h-full space-x-6">
