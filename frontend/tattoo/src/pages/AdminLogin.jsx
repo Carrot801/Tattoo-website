@@ -35,7 +35,7 @@ const AdminLogin = () => {
         return;
       }
       // Redirect to admin dashboard
-      window.location.href = '/home';
+      window.location.href = '/Tattoo-website/home';
     } catch (err) {
       setError(err.message);
     } finally {

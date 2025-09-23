@@ -1,6 +1,6 @@
 import React from 'react'
 import Img from "/images/tatttoo_home.avif"
-
+import '../index.css';
 const AboutMe = ({children, id}) => {
   return <div id={id} className="noise flex flex-col sm:flex-row w-full h-full lg:h-[745px] bg-red-700">
 

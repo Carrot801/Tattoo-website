@@ -3,6 +3,8 @@ import Img from "/images/tatttoo_home.avif"
 import AboutMe from '../components/AboutMe'
 import GalleryItems from '../components/GalleryItems'
 import Contact from '../components/Contact'
+import '../index.css';
+
 const Home = () => {
   return (
     <div id="home">
