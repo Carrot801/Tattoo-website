@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useCurrentUser } from "./useCurrentUser";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 const getImageStyles = (pos) => {
   let scale = 0.7;

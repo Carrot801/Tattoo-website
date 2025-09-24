@@ -6,7 +6,7 @@ const Contact = () => {
     <div id="contact-section" className="contactBackground w-full max-h-[925px] lg:h-[745px] h-[600px] sm:h-[600px] flex flex-col justify-center">
         <div className="contactWindow flex flex-col absolute left-0 w-full h-[600px] lg:w-[520px] lg:h-[527px] lg:left-[60px] md:w-[450px] md:h-[400px] md:left-[40px] items-center" >
           <div className="relative top-[50px] sm:top-[20px] justify-center text-white text-5xl md:text-4xl sm:text-3xl font-normal font-['Inknut_Antiqua']">
-            Studio sdf
+            Studio
           </div>
           <div className="relative space-y-12 md:space-y-10 sm:space-y-5 top-[120px] md:top-[50px] sm:top-[30px] w-[410px] h-[300px] justify-center text-white text-4xl md:text-3xl sm:text-2xl font-normal font-['Prompt']">
             <div className="flex items-center space-x-4 lg:space-x-6">
