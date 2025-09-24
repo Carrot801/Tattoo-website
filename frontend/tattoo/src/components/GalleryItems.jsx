@@ -42,7 +42,7 @@ const GalleryItems = ({ children }) => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/images");
+        const res = await fetch("https://tattoo-website-3rg5.onrender.com/api/images");
         if (!res.ok) throw new Error("Failed to fetch images");
         const data = await res.json();
         const galleryImages = data.filter((img) => img.type === "GALLERY");
@@ -59,7 +59,7 @@ const GalleryItems = ({ children }) => {
   const handleDelete = async (id) => {
     setContextMenu(null);
     try {
-      const res = await fetch(`http://localhost:4000/api/images/${id}`, {
+      const res = await fetch(`https://tattoo-website-3rg5.onrender.com0/api/images/${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -85,7 +85,7 @@ const GalleryItems = ({ children }) => {
     formData.append("description", "Tattoo description");
 
     try {
-      const response = await fetch("http://localhost:4000/api/images", {
+      const response = await fetch("https://tattoo-website-3rg5.onrender.com/api/images", {
         method: "POST",
         body: formData,
         credentials: "include",
@@ -114,7 +114,7 @@ const GalleryItems = ({ children }) => {
     setImages(reordered);
 
     // Optionally notify backend of new order
-    fetch("http://localhost:4000/api/images/reorder", {
+    fetch("https://tattoo-website-3rg5.onrender.com/api/images/reorder", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
