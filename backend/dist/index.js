@@ -16,7 +16,7 @@ const app = (0, express_1.default)(); // <-- declare app first
 app.use((0, helmet_1.default)());
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
-app.use((0, cors_1.default)({ origin: "http://localhost:5173", credentials: true }));
+app.use((0, cors_1.default)({ origin: ["http://localhost:5173","https://carrot801.github.io",], credentials: true }));
 app.use((0, express_rate_limit_1.default)({ windowMs: 60000, max: 60 }));
 app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "..", "uploads")));
 // Routes
