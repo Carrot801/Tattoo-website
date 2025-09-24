@@ -14,7 +14,7 @@ const app = express(); // <-- declare app first
 app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: ["http://localhost:5173","https://carrot801.github.io",], credentials: true }));
 app.use(rateLimit({ windowMs: 60_000, max: 60 }));
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
