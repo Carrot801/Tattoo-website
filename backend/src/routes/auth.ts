@@ -6,29 +6,30 @@ import jwt from "jsonwebtoken";
 
 const router = Router();
 
-router.post("/login", async (req, res) => {
+router.post("/login",async (req, res) =>{
     const { email, password } = req.body;
 
-    // Replace with your real auth logic
-    if (email !== "admin@example.com" || password !== "password") {
-        return res.status(401).json({ message: "Invalid credentials" });
-    }
+    const user = await prisma.user.findUnique({ where: { email }});
+    if (!user) return res.status(401).json({error: "Invalid credentials"});
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) return res.status(401).json({error: "Invalid credentials"});
 
     const token = jwt.sign(
-        { id: "123", role: "ADMIN", email },
+        { id: user.id, role: user.role },
         process.env.JWT_SECRET || "dev-secret",
-        { expiresIn: "1h" }
+        { expiresIn: "2h" }
     );
 
-    // Set the cookie
     res.cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production", // true for HTTPS only
         sameSite: "lax", // or 'none' if cross-origin
-        maxAge: 3600 * 1000, // 1 hour
+        maxAge: 3600 * 1000 *2, // 1 hour
     });
 
-    res.json({ message: "Logged in" });
+
+    res.json({ success: true });
 });
 
 router.get("/me", (req,res) => {
