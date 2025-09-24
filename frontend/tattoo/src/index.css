@@ -10,6 +10,17 @@
     background-blend-mode: overlay;
     background-size: cover;
 }
+.contactWindow{
+    background-image: 
+    url("../images/noisy.png"),
+    url("../images/GalleryItemBackground.png");
+    background-size: cover, cover;
+    background-repeat: repeat, no-repeat;
+    background-color:
+    rgba(193, 41, 46, 0.43),
+    rgba(2, 1, 0, 1);
+    background-blend-mode: overlay;   
+}
 .contactBackground {
     background-image: 
     url("../images/noisy.png"),
@@ -20,17 +31,7 @@
     background-color: rgba(0, 0, 0, 0.4);
     background-blend-mode: overlay;  
 }
-.contactWindow{
-    background-image: 
-    url("../images/noisy.png"),
-    url("../images/GalleryItemBackground.jpg");
-    background-size: cover,cover;
-    background-repeat: repeat;
-    background:
-    rgba(193, 41, 46, 0.43),
-    rgba(2, 1, 0, 1); 
-    background-blend-mode: overlay;  
-}
+
 .sideImage-hover {
   @apply object-cover cursor-pointer opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-105;
 }
@@ -42,4 +43,3 @@
 .sideImage-small {
   @apply w-[356px] h-[470px];
 }
-

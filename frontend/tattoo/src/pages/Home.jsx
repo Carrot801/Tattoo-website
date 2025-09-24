@@ -7,7 +7,7 @@ import '../index.css';
 
 const Home = () => {
   return (
-    <div id="home">
+    <div id="Home">
       <div className="relative w-full h-1/2 sm:h-screen md:h-screen lg:h-screen overflow-hidden">
         <div>
           <button>
