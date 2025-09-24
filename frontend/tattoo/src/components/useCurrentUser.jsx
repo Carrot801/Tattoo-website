@@ -10,7 +10,7 @@ export const useCurrentUser = () => {
     if (cachedUser) return;
     const fetchUser = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/auth/me", {
+        const res = await fetch("https://tattoo-website-3rg5.onrender.com/api/auth/me", {
           credentials: "include",
         });
         if (!res.ok) {
