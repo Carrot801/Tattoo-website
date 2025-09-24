@@ -25,7 +25,7 @@ router.post("/login",async (req, res) =>{
         httpOnly: true,
         secure: process.env.NODE_ENV === "production", // true for HTTPS only
         sameSite: "lax", // or 'none' if cross-origin
-        maxAge: 3600 * 1000 *2, // 1 hour
+        maxAge: 3600 * 1000, // 1 hour
     });
 
 
@@ -33,6 +33,7 @@ router.post("/login",async (req, res) =>{
 });
 
 router.get("/me", (req,res) => {
+    console.log("Cookies received:", req.cookies); // <-- add this line
     const token = req.cookies.token;
     if(!token) return res.status(401).json({error: "Not authenticated" });
 
@@ -43,5 +44,6 @@ router.get("/me", (req,res) => {
         return res.status(401).json({ error: "Invalid token" });
     }
 });
+
 
 export default router;
