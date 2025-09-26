@@ -1,6 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
-import { supabase } from "../lib/supabase";
+import { supabase } from "@lib/supabase";
 import { requireAdmin } from "../middleware/auth";
 import { PrismaClient, ImageType } from "@prisma/client";
 import path from "path";

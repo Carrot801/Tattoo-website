@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const multer_1 = __importDefault(require("multer"));
-const supabase_1 = require("../lib/supabase");
+const supabase_1 = require("@lib/supabase");
 const auth_1 = require("../middleware/auth");
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
