@@ -5,80 +5,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const multer_1 = __importDefault(require("multer"));
+const supabase_1 = require("../lib/supabase");
 const auth_1 = require("../middleware/auth");
 const client_1 = require("@prisma/client");
-const path_1 = __importDefault(require("path"));
-const fs_1 = __importDefault(require("fs"));
 const prisma = new client_1.PrismaClient();
 const router = (0, express_1.Router)();
-// Multer storage setup
-const storage = multer_1.default.diskStorage({
-    destination: (req, file, cb) => {
-        const uploadDir = "uploads/";
-        if (!fs_1.default.existsSync(uploadDir))
-            fs_1.default.mkdirSync(uploadDir);
-        cb(null, uploadDir);
-    },
-    filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-        cb(null, uniqueSuffix + path_1.default.extname(file.originalname));
-    },
-});
-// Multer upload with file filter (TypeScript-safe)
-const upload = (0, multer_1.default)({
-    storage,
-    fileFilter: (req, file, cb) => {
-        if (!file.mimetype.startsWith("image/")) {
-            // reject non-image files
-            return cb(null, false); // multer-safe way
-        }
-        cb(null, true);
-    },
-});
+// Multer memory storage (keeps file in RAM)
+const upload = (0, multer_1.default)({ storage: multer_1.default.memoryStorage() });
 // ---------------- POST /api/images (ADMIN only) ----------------
 router.post("/", auth_1.requireAdmin, upload.single("image"), async (req, res) => {
-    try {
-        if (!req.file)
-            return res.status(400).json({ error: "No image uploaded" });
-        const { type, title, description } = req.body;
-        // Validate type
-        if (!Object.values(client_1.ImageType).includes(type)) {
-            return res.status(400).json({ error: "Invalid image type" });
-        }
-        const image = await prisma.image.create({
-            data: {
-                type: type,
-                title: title || null,
-                description: description || null,
-                url: `/uploads/${req.file.filename}`, // serve via static
-            },
-        });
-        res.json({ success: true, image });
-    }
-    catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Server error" });
-    }
-});
-// ---------------- DELETE /api/images (ADMIN only) ----------------
-router.delete("/:id", auth_1.requireAdmin, async (req, res) => {
-    try {
-        const id = parseInt(req.params.id, 10);
-        const image = await prisma.image.findUnique({ where: { id } });
-        if (!image)
-            return res.status(404).json({ error: "Image not found" });
-        const filePath = path_1.default.join(process.cwd(), "uploads", path_1.default.basename(image.url));
-        fs_1.default.unlink(filePath, (err) => {
-            if (err)
-                console.warn("Failed to delete file from disk:", err);
-        });
-        await prisma.image.delete({ where: { id } });
-        res.json({ message: "Image deleted" });
-    }
-    catch (err) {
-        console.error("DELETE /images error:", err);
-        res.status(500).json({ error: "Server error" });
-    }
+    if (!req.file)
+        return res.status(400).json({ error: "No image uploaded" });
+    const { type, title, description } = req.body;
+    const filePath = `${Date.now()}-${req.file.originalname}`;
+    // Upload buffer to Supabase
+    const { error: uploadError } = await supabase_1.supabase.storage
+        .from("images") // your bucket name
+        .upload(filePath, req.file.buffer, {
+        contentType: req.file.mimetype,
+        upsert: false,
+    });
+    if (uploadError)
+        return res.status(500).json({ error: uploadError.message });
+    // Get public URL
+    const { data } = supabase_1.supabase.storage.from("images").getPublicUrl(filePath);
+    const image = await prisma.image.create({
+        data: {
+            type,
+            title: title || null,
+            description: description || null,
+            url: data.publicUrl || "",
+        },
+    });
+    res.json({ success: true, image });
 });
 // ---------------- PUT /api/images/reorder (ADMIN only) ----------------
 router.put("/reorder", auth_1.requireAdmin, async (req, res) => {
