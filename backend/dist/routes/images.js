@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const multer_1 = __importDefault(require("multer"));
-const supabase_1 = require("@lib/supabase");
+const supabase_1 = require("../lib/supabase");
 const auth_1 = require("../middleware/auth");
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
@@ -38,6 +38,28 @@ router.post("/", auth_1.requireAdmin, upload.single("image"), async (req, res) =
         },
     });
     res.json({ success: true, image });
+});
+// ---------------- DELETE /api/images/:id (ADMIN only) ----------------
+router.delete("/:id", auth_1.requireAdmin, async (req, res) => {
+    try {
+        const imageId = parseInt(req.params.id);
+        const image = await prisma.image.findUnique({ where: { id: imageId } });
+        if (!image)
+            return res.status(404).json({ error: "Image not found" });
+        // Delete from Supabase
+        const { error: supabaseError } = await supabase_1.supabase.storage
+            .from("images")
+            .remove([image.url.split("/").pop()]);
+        if (supabaseError)
+            console.warn("Supabase delete error:", supabaseError.message);
+        // Delete from database
+        await prisma.image.delete({ where: { id: imageId } });
+        res.json({ success: true });
+    }
+    catch (err) {
+        console.error("DELETE /images/:id error:", err);
+        res.status(500).json({ error: "Failed to delete image" });
+    }
 });
 // ---------------- PUT /api/images/reorder (ADMIN only) ----------------
 router.put("/reorder", auth_1.requireAdmin, async (req, res) => {

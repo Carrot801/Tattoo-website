@@ -43,6 +43,30 @@ router.post("/", requireAdmin, upload.single("image"), async (req, res) => {
 
     res.json({ success: true, image });
 });
+// ---------------- DELETE /api/images/:id (ADMIN only) ----------------
+router.delete("/:id", requireAdmin, async (req, res) => {
+    try {
+        const imageId = parseInt(req.params.id);
+        const image = await prisma.image.findUnique({ where: { id: imageId } });
+
+        if (!image) return res.status(404).json({ error: "Image not found" });
+
+        // Delete from Supabase
+        const { error: supabaseError } = await supabase.storage
+            .from("images")
+            .remove([image.url.split("/").pop()!]);
+
+        if (supabaseError) console.warn("Supabase delete error:", supabaseError.message);
+
+        // Delete from database
+        await prisma.image.delete({ where: { id: imageId } });
+
+        res.json({ success: true });
+    } catch (err) {
+        console.error("DELETE /images/:id error:", err);
+        res.status(500).json({ error: "Failed to delete image" });
+    }
+});
 
 
 // ---------------- PUT /api/images/reorder (ADMIN only) ----------------
