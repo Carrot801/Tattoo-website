@@ -6,5 +6,4 @@ const supabaseKey = process.env.SUPABASE_KEY as string;
 if (!supabaseUrl || !supabaseKey) {
     throw new Error("Missing Supabase env vars. Check Render settings or .env file.");
 }
-
 export const supabase = createClient(supabaseUrl, supabaseKey);
