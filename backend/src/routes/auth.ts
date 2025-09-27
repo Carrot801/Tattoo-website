@@ -29,12 +29,12 @@ router.post("/login",async (req, res) =>{
     });
 
 
-    res.json({ success: true, token });
+    res.json({ success: true });
 });
 
 router.get("/me", (req,res) => {
     console.log("Cookies received:", req.cookies); // <-- add this line
-    const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
+    const token = req.cookies.token;
     if(!token) return res.status(401).json({error: "Not authenticated" });
 
     try {
