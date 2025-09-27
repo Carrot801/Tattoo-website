@@ -29,12 +29,16 @@ router.post("/", auth_1.requireAdmin, upload.single("image"), async (req, res) =
         return res.status(500).json({ error: uploadError.message });
     // Get public URL
     const { data } = supabase_1.supabase.storage.from("images").getPublicUrl(filePath);
+    const maxPosition = await prisma.image.aggregate({
+        _max: { position: true },
+    });
     const image = await prisma.image.create({
         data: {
             type,
             title: title || null,
             description: description || null,
             url: data.publicUrl || "",
+            position: (maxPosition._max.position ?? -1) + 1,
         },
     });
     res.json({ success: true, image });
@@ -65,7 +69,6 @@ router.delete("/:id", auth_1.requireAdmin, async (req, res) => {
 router.put("/reorder", auth_1.requireAdmin, async (req, res) => {
     try {
         const { order } = req.body;
-        // Example: [{ id: 5, position: 0 }, { id: 7, position: 1 }]
         if (!Array.isArray(order)) {
             return res.status(400).json({ error: "Order must be an array" });
         }
@@ -84,7 +87,7 @@ router.put("/reorder", auth_1.requireAdmin, async (req, res) => {
 // ---------------- GET /api/images (public) ----------------
 router.get("/", async (req, res) => {
     try {
-        const images = await prisma.image.findMany();
+        const images = await prisma.image.findMany({ orderBy: { position: "asc" } });
         res.json(images);
     }
     catch (err) {

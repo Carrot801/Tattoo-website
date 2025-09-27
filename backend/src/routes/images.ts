@@ -99,7 +99,7 @@ router.put("/reorder", requireAdmin, async (req, res) => {
 // ---------------- GET /api/images (public) ----------------
 router.get("/", async (req, res) => {
     try {
-        const images = await prisma.image.findMany();
+        const images = await prisma.image.findMany({ orderBy: { position: "asc" } });
         res.json(images);
     } catch (err) {
         console.error(err);
