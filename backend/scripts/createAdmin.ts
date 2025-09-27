@@ -2,7 +2,10 @@ import { PrismaClient } from "@prisma/client";
 import * as bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
-
+/*
+admin@example.com
+adminPassword97
+*/
 async function main() {
     const email = "admin@example.com";
     const password = "adminPassword97";
