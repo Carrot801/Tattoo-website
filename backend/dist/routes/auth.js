@@ -42,6 +42,9 @@ const prisma = new client_1.PrismaClient();
 const bcrypt = __importStar(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const router = (0, express_1.Router)();
+router.get("/heartbeat", (req, res) => {
+    res.send("Hello from Render backend! Still awake 🚀");
+});
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     const user = await prisma.user.findUnique({ where: { email } });

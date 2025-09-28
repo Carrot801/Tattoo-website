@@ -5,6 +5,9 @@ import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const router = Router();
+router.get("/heartbeat", (req, res) => {
+    res.send("Hello from Render backend! Still awake 🚀");
+});
 
 router.post("/login",async (req, res) =>{
     const { email, password } = req.body;
