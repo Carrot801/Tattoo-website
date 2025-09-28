@@ -11,7 +11,6 @@ const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const auth_1 = __importDefault(require("./routes/auth"));
 const images_1 = __importDefault(require("./routes/images"));
 const path_1 = __importDefault(require("path")); // <-- import after routes
-const node_fetch_1 = __importDefault(require("node-fetch"));
 const app = (0, express_1.default)(); // <-- declare app first
 // Middleware
 app.use((0, helmet_1.default)());
@@ -30,11 +29,16 @@ app.listen(PORT, () => {
     const url = `https://your-app-name.onrender.com/api/auth/heartbeat`; // use your Render URL
     setInterval(async () => {
         try {
-            const res = await (0, node_fetch_1.default)(url);
+            const res = await fetch(url);
             console.log("🔄 Self-ping success:", res.status);
         }
         catch (err) {
-            console.error("⚠️ Self-ping failed:", err);
+            if (err instanceof Error) {
+                console.error("⚠️ Self-ping failed:", err.message);
+            }
+            else {
+                console.error("⚠️ Self-ping failed with unknown error", err);
+            }
         }
     }, 14 * 60 * 1000);
 });

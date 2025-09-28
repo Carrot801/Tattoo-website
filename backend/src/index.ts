@@ -7,7 +7,6 @@ import rateLimit from "express-rate-limit";
 import authRouter from "./routes/auth";
 import imageRouter from "./routes/images";
 import path from "path"; // <-- import after routes
-import fetch from "node-fetch";
 
 const app = express(); // <-- declare app first
 
@@ -36,7 +35,12 @@ app.listen(PORT, () => {
             const res = await fetch(url);
             console.log("🔄 Self-ping success:", res.status);
         } catch (err) {
-            console.error("⚠️ Self-ping failed:", err);
+            if (err instanceof Error) {
+                console.error("⚠️ Self-ping failed:", err.message);
+            } else {
+                console.error("⚠️ Self-ping failed with unknown error", err);
+            }
         }
     }, 14 * 60 * 1000);
+
 });
