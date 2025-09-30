@@ -2,6 +2,7 @@ import React ,{useState,useEffect} from 'react'
 import Img from "/images/tatttoo_home.avif"
 import '../index.css';
 import { useCurrentUser } from './useCurrentUser';
+import { uploadImage } from '../utils/uploadImage';
 const AboutMe = ({children, id}) => {
       const [profileImage, setProfileImage] = useState(null); 
       const { isAdmin } = useCurrentUser();
@@ -9,28 +10,11 @@ const AboutMe = ({children, id}) => {
       const handleImageUpload = async (e) => {
       e.preventDefault();
       const file = e.target.elements[0].files[0];
-      if (!file) {
-        alert("Please select a file first.");
-        return;
-      }
-      const formData = new FormData();
-      formData.append("image", file);
-      formData.append("type", "PROFILE");
-      formData.append("title", "Tattoo Image");
-      formData.append("description", "Tattoo description");
-  
       try {
-        const response = await fetch("https://tattoo-website-3rg5.onrender.com/api/images", {
-          method: "POST",
-          body: formData,
-          credentials: "include",
-        });
-        const data = await response.json();
-        if (!response.ok) {
-          alert(data.error || "Image upload failed");
-          return;
+        const uploadedData = await uploadImage(file,"PROFILE");
+        if(uploadedData) {
+          setProfileImage(uploadedData);
         }
-        setProfileImage(data.image);
         e.target.reset();
       } catch (err) {
         console.log(err.message);

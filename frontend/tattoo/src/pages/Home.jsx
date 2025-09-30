@@ -5,7 +5,7 @@ import GalleryItems from '../components/GalleryItems'
 import Contact from '../components/Contact'
 import '../index.css';
 import { useCurrentUser } from '../components/useCurrentUser';
-
+import { uploadImage } from '../utils/uploadImage';
 const Home = () => {
     const [mainImage, setMainImage] = useState(null); 
     const { isAdmin } = useCurrentUser();
@@ -13,30 +13,13 @@ const Home = () => {
     const handleImageUpload = async (e) => {
     e.preventDefault();
     const file = e.target.elements[0].files[0];
-    if (!file) {
-      alert("Please select a file first.");
-      return;
-    }
-    const formData = new FormData();
-    formData.append("image", file);
-    formData.append("type", "MAIN");
-    formData.append("title", "Tattoo Image");
-    formData.append("description", "Tattoo description");
-
     try {
-      const response = await fetch("https://tattoo-website-3rg5.onrender.com/api/images", {
-        method: "POST",
-        body: formData,
-        credentials: "include",
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        alert(data.error || "Image upload failed");
-        return;
+      const uploatedData = await uploadImage(file,"MAIN");
+      if(uploatedData) {
+        setMainImage(uploatedData);
       }
-      setMainImage(data.image);
       e.target.reset();
-    } catch (err) {
+    }catch (err) {
       console.log(err.message);
     }
   };

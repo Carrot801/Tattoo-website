@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useCurrentUser } from "./useCurrentUser";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-
+import { uploadImage } from '../utils/uploadImage';
 const getImageStyles = (pos, isMobile) => {
   let scale = 0.7;
   let translateX = pos * (isMobile ? 200 : 500); // smaller distance on mobile
@@ -70,7 +70,7 @@ const GalleryItems = ({ children,id }) => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await fetch("https://tattoo-website-3rg5.onrender.com/api/images");
+        const res = await fetch("/api/images");
         if (!res.ok) throw new Error("Failed to fetch images");
         const data = await res.json();
         const galleryImages = data.filter((img) => img.type === "GALLERY");
@@ -86,7 +86,7 @@ const GalleryItems = ({ children,id }) => {
   const handleDelete = async (id) => {
     setContextMenu(null);
     try {
-      const res = await fetch(`https://tattoo-website-3rg5.onrender.com/api/images/${id}`, {
+      const res = await fetch(`/api/images/${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -100,28 +100,11 @@ const GalleryItems = ({ children,id }) => {
   const handleImageUpload = async (e) => {
     e.preventDefault();
     const file = e.target.elements[0].files[0];
-    if (!file) {
-      alert("Please select a file first.");
-      return;
-    }
-    const formData = new FormData();
-    formData.append("image", file);
-    formData.append("type", "GALLERY");
-    formData.append("title", "Tattoo Image");
-    formData.append("description", "Tattoo description");
-
     try {
-      const response = await fetch("https://tattoo-website-3rg5.onrender.com/api/images", {
-        method: "POST",
-        body: formData,
-        credentials: "include",
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        alert(data.error || "Image upload failed");
-        return;
+      const uploadedData = await uploadImage(file,"GALLERY");
+      if(uploadedData) {
+        setImages((prev) => [...prev, uploadedData]);
       }
-      setImages((prev) => [...prev, data.image]);
       e.target.reset();
     } catch (err) {
       console.log(err.message);
@@ -135,7 +118,7 @@ const GalleryItems = ({ children,id }) => {
     reordered.splice(result.destination.index, 0, moved);
     setImages(reordered);
 
-    fetch("https://tattoo-website-3rg5.onrender.com/api/images/reorder", {
+    fetch("/api/images/reorder", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -243,7 +226,7 @@ const GalleryItems = ({ children,id }) => {
                 setImages(reordered);
 
                 // persist to server
-                fetch("https://tattoo-website-3rg5.onrender.com/api/images/reorder", {
+                fetch("/api/images/reorder", {
                   method: "PUT", // <-- changed from POST
                   headers: { "Content-Type": "application/json" },
                   credentials: "include",

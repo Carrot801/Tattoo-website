@@ -31,7 +31,7 @@ const Contact = () => {
                 src="https://img.icons8.com/?size=100&id=3723&format=png&color=FFFFFF" 
                 alt="geo-g"/>
               </a>
-              <span>ul. HzTattoo</span>
+              <span>ul. Gagarina 26</span>
             </div>
           </div>
           <div className="flex items-center justify-center space-x-6 w-full sm:w-[400px] h-[80px]">

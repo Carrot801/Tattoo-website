@@ -20,7 +20,7 @@ const AdminLogin = () => {
 
     try {
       // Call backend API for authentication
-      const response = await fetch('https://tattoo-website-3rg5.onrender.com/api/auth/login', {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
