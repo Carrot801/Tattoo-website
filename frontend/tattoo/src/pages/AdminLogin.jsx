@@ -35,7 +35,7 @@ const AdminLogin = () => {
         return;
       }
       // Redirect to admin dashboard
-      window.location.href = '/';
+      window.location.href = '/Tattoo-website/';
     } catch (err) {
       setError(err.message);
     } finally {
@@ -45,8 +45,7 @@ const AdminLogin = () => {
   return (
   <div className="flex justify-center items-center h-screen bg-gray-900">
     {/* Card container */}
-    <div className="bg-red-700/90 noise w-[400px] p-8 rounded-2xl shadow-lg flex flex-col items-center text-white">
-      
+    <div className="bg-red-700/90 noise w-[350px] sm:w-[400px] p-8 rounded-2xl shadow-lg flex flex-col items-center text-white">      
       {/* Title */}
       <h1 className="text-3xl font-bold mb-6 font-['Inknut_Antiqua']">
         Admin Login
