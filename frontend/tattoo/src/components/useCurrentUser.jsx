@@ -8,7 +8,7 @@ export const useCurrentUser = () => {
     const fetchUser = async () => {
       try {
         // Use Render URL in production, localhost for dev
-        const res = await fetch("/api/auth/me", {
+        const res = await fetch("https://tattoo-website-3rg5.onrender.com/api/auth/me", {
           credentials: "include", // <-- sends cookies
         });
 

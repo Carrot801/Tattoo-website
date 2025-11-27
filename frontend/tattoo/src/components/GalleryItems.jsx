@@ -70,7 +70,7 @@ const GalleryItems = ({ children,id }) => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await fetch("/api/images");
+        const res = await fetch("https://tattoo-website-3rg5.onrender.com/api/images");
         if (!res.ok) throw new Error("Failed to fetch images");
         const data = await res.json();
         const galleryImages = data.filter((img) => img.type === "GALLERY");
@@ -86,7 +86,7 @@ const GalleryItems = ({ children,id }) => {
   const handleDelete = async (id) => {
     setContextMenu(null);
     try {
-      const res = await fetch(`/api/images/${id}`, {
+      const res = await fetch(`https://tattoo-website-3rg5.onrender.com/api/images/${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -118,7 +118,7 @@ const GalleryItems = ({ children,id }) => {
     reordered.splice(result.destination.index, 0, moved);
     setImages(reordered);
 
-    fetch("/api/images/reorder", {
+    fetch("https://tattoo-website-3rg5.onrender.com/api/images/reorder", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -226,7 +226,7 @@ const GalleryItems = ({ children,id }) => {
                 setImages(reordered);
 
                 // persist to server
-                fetch("/api/images/reorder", {
+                fetch("https://tattoo-website-3rg5.onrender.com/api/images/reorder", {
                   method: "PUT", // <-- changed from POST
                   headers: { "Content-Type": "application/json" },
                   credentials: "include",

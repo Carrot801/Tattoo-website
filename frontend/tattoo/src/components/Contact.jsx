@@ -48,7 +48,7 @@ const Contact = () => {
           <a href="#" >
             <img className="w-15 h-16 md:w-14 md:h-14 sm:w-12 sm:h-12" 
             src="https://img.icons8.com/?size=100&id=45163&format=png&color=FFFFFF" 
-            alt="facebook-f"/>
+            alt="telegram-f"/>
           </a>
           </div>
 
