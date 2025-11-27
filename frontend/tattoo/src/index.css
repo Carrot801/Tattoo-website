@@ -3,14 +3,18 @@
 
 .noise {
     background-image: url("../images/noisy.png");
+    background-size: cover;
+    background-repeat: repeat;
 }
+
 .galleryItemBackground {
     background-image: url("../images/GalleryItemBackground.jpg");
     /* background-color: rgba(193, 41, 46, 0.3); */
     background-color: rgba(0, 0, 0, 0.3);
     background-blend-mode: overlay;
     background-size: cover;
-}.contactWindow{
+}
+.contactWindow{
     background-image: 
     url("../images/noisy.png"),
     url("../images/GalleryItemBackground.png");

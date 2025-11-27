@@ -1,9 +1,11 @@
 import React,{ useState,useEffect } from 'react'
-import Img from "/images/tatttoo_home.avif"
+import Img from "../images/tatttoo_home.avif"
 import AboutMe from '../components/AboutMe'
 import GalleryItems from '../components/GalleryItems'
 import Contact from '../components/Contact'
 import '../index.css';
+
+
 import { useCurrentUser } from '../components/useCurrentUser';
 import { uploadImage } from '../utils/uploadImage';
 const Home = () => {
@@ -78,9 +80,11 @@ const Home = () => {
             alt="Home"
           />
         ) : (
-          <div className="absolute top-20 left-0 w-full h-full bg-gray-800 flex justify-center text-white">
-            No image uploaded yet.
-          </div>
+          <img 
+            src={Img} 
+            className="absolute top-0 left-0 w-full h-full object-cover object-center" 
+            alt="Home"
+          />
         )}
 
         {/* Red overlay */}

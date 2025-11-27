@@ -1,6 +1,7 @@
 import React ,{useState,useEffect} from 'react'
 import Img from "/images/tatttoo_home.avif"
 import '../index.css';
+import tattoo2 from "../images/tattoo-2.avif";
 import { useCurrentUser } from './useCurrentUser';
 import { uploadImage } from '../utils/uploadImage';
 const AboutMe = ({children, id}) => {
@@ -60,9 +61,9 @@ const AboutMe = ({children, id}) => {
       src={profileImage.url} 
       alt="profile photo" />
        ) : (
-        <div className="absolute left-0 w-full h-full bg-gray-800 flex items-center justify-center text-white">
-            No image uploaded yet.
-        </div>
+        <img className="w-full sm:h-full object-cover object-center"
+          src={tattoo2} 
+          alt="profile photo" />
        )}
         {/* Red overlay */}
         <div className="absolute top-0 left-0 w-full h-full bg-red-700/20"></div>

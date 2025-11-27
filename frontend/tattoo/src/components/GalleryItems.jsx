@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useCurrentUser } from "./useCurrentUser";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { uploadImage } from '../utils/uploadImage';
+import tattoo1 from "../images/tattoo-1.avif";
+import tattoo2 from "../images/tattoo-2.avif";
 const getImageStyles = (pos, isMobile) => {
   let scale = 0.7;
   let translateX = pos * (isMobile ? 200 : 500); // smaller distance on mobile
@@ -34,7 +36,15 @@ const getImageStyles = (pos, isMobile) => {
 };
 
 const GalleryItems = ({ children,id }) => {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState([
+    { id: 1, url: tattoo1, title: "Tattoo 1" },
+    { id: 2, url: tattoo2, title: "Tattoo 2" },
+    { id: 3, url: tattoo1, title: "Tattoo 1" },
+    { id: 4, url: tattoo2, title: "Tattoo 1" },
+    { id: 5, url: tattoo1, title: "Tattoo 1" },
+    { id: 6, url: tattoo2, title: "Tattoo 1" },
+
+  ]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [contextMenu, setContextMenu] = useState(null);
   const { isAdmin } = useCurrentUser();
@@ -42,6 +52,7 @@ const GalleryItems = ({ children,id }) => {
   // long press timer reference
   let longPressTimer;
 
+  
   const handleTouchStart = (e, imgId) => {
     if (!isAdmin) return;
 
