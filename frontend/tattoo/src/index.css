@@ -2,13 +2,13 @@
 @import "tailwindcss";
 
 .noise {
-    background-image: url("../images/noisy.png");
+    background-image: url("/public/images/noisy.png");
     background-size: cover;
     background-repeat: repeat;
 }
 
 .galleryItemBackground {
-    background-image: url("../images/GalleryItemBackground.jpg");
+    background-image: url("/public/images/GalleryItemBackground.jpg");
     /* background-color: rgba(193, 41, 46, 0.3); */
     background-color: rgba(0, 0, 0, 0.3);
     background-blend-mode: overlay;
@@ -16,8 +16,8 @@
 }
 .contactWindow{
     background-image: 
-    url("../images/noisy.png"),
-    url("../images/GalleryItemBackground.png");
+    url("/public/images/noisy.png"),
+    url("/public/images/GalleryItemBackground.png");
     background-size: cover, cover;
     background-repeat: repeat, no-repeat;
     background-color:
@@ -28,8 +28,8 @@
 
 .contactBackground {
     background-image: 
-    url("../images/noisy.png"),
-    url("../images/map.png");
+    url("/public/images/noisy.png"),
+    url("/public/images/map.png");
     background-size: cover, cover;
     background-repeat: repeat, no-repeat;
     opacity: 0.8;

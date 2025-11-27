@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useCurrentUser } from "./useCurrentUser";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { uploadImage } from '../utils/uploadImage';
-import tattoo1 from "../images/tattoo-1.avif";
-import tattoo2 from "../images/tattoo-2.avif";
+import tattoo1 from "/public/images/tattoo-1.avif";
+import tattoo2 from "/public/images/tattoo-2.avif";
 const getImageStyles = (pos, isMobile) => {
   let scale = 0.7;
   let translateX = pos * (isMobile ? 200 : 500); // smaller distance on mobile

@@ -1,5 +1,5 @@
 import React,{ useState,useEffect } from 'react'
-import Img from "../images/tatttoo_home.avif"
+import Img from "/public/images/tatttoo_home.avif"
 import AboutMe from '../components/AboutMe'
 import GalleryItems from '../components/GalleryItems'
 import Contact from '../components/Contact'
