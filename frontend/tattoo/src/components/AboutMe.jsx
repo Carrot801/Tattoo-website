@@ -1,7 +1,7 @@
 import React ,{useState,useEffect} from 'react'
 import Img from "/images/tatttoo_home.avif"
 import '../index.css';
-import tattoo2 from "/public/images/tattoo-2.avif";
+import tattoo2 from "/public/images/tattoo-master.jpg";
 import { useCurrentUser } from './useCurrentUser';
 import { uploadImage } from '../utils/uploadImage';
 const AboutMe = ({children, id}) => {
